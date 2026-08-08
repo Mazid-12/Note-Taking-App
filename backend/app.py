@@ -24,18 +24,32 @@ def add_note():
     data = request.get_json()
 
     idUser = data['idUser']
-    noteContent = data('noteContent')
+    noteContent = data['noteContent']
 
     create_note(idUser, noteContent)
     return ("message: note created")
 
 @app.route("/notes", methods=["GET"])
-def get_notes():
+def get_notes(): 
     data = request.get_json()
     idUser = data['idUser']
-    noteData = get_note(idUser)
-    return ('message: note found!')
-    
+    note_data = get_note(idUser)
+    return note_data
+
+@app.route("/notes", methods=["PUT"])
+def edit_note():
+    data = request.get_json()
+    id_note = data['idNote']
+    new_content = data['newContent']
+    update_note(id_note, new_content)
+    return ('message: note updated')
+
+@app.route('/notes', methods=["DELETE"])
+def cancel_note():
+    data = request.get_json()
+    id_note = data['idNote']
+    delete_note(id_note)
+    return ('message: note deleted')
 
 
 if __name__=="__main__":

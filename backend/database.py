@@ -13,9 +13,7 @@ def get_connection():
             host=os.getenv('db_host'),
             port=os.getenv('db_port'),
         )
-
         print('Successful connection')
-        connector.close()
         return connector
     except:
         print('Connection failed')
