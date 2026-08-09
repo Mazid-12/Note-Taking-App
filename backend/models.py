@@ -23,26 +23,40 @@ def create_note(id_user, content):
 
 #READ
 def get_note(id_user):
-        connector = get_connection()
-        cursor = connector.cursor()
-        query = f"select * from notes where id_user = '{id_user}';"
-        cursor.execute(query)
-        notes = cursor.fetchall()
-        notes_list = []
+    connector = get_connection()
+    cursor = connector.cursor()
+    query = f"select * from notes where id_user = '{id_user}';"
+    cursor.execute(query)
+    notes = cursor.fetchall()
+    notes_list = []
+    note_dict = {}
+    print(notes)
+    for note in notes:
+        note_dict['idUser'] =note[1]
+        note_dict['idNote'] = note[0]
+        note_dict['content'] = note[2]
+        notes_list.append(note_dict)
         note_dict = {}
-        print(notes)
-        for note in notes:
-            note_dict['idUser'] =note[1]
-            note_dict['idNote'] = note[0]
-            note_dict['content'] = note[2]
-            notes_list.append(note_dict)
-            note_dict = {}
-        print(notes_list)
-        connector.commit()
-        connector.close()
-        return notes_list
+    print(notes_list)
+    connector.commit()
+    connector.close()
+    return notes_list
 
-
+def get_user_by_username(username):
+    connector = get_connection()
+    cursor = connector.cursor()
+    query = f"select * from users where username = '{username}';"
+    cursor.execute(query)
+    user_data = cursor.fetchone()
+    connector.commit()
+    connector.close()
+    if not user_data:
+        return {}
+    user = {}
+    user["id"]= user_data[0]
+    user["username"]= user_data[1]
+    user["password"]= user_data[2]
+    return user
 
 #UPDATE
 def update_note(id_note, new_content):
