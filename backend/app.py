@@ -1,6 +1,6 @@
 from database import get_connection
 from models import create_user, create_note, get_note, update_note, delete_note, get_user_by_username
-from flask import Flask, request
+from flask import Flask, request, session
 from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
@@ -84,13 +84,19 @@ def login():
     is_correct = check_password_hash(user["password"], password)
     if not is_correct:
         return {"error": "Incorrect password"}, 401
+    session["user_id"] = user['id']
     return {"message": "Login successful"}, 200
 
 
-
+@app.route("/me",  methods=["GET"])
+def me():
+    user_id = session.get("user_id")
+    return {"user_id": user_id}, 200
 
 
 
 
 if __name__=="__main__":
+    app.secret_key = "test-secret-key" \
+    ""
     app.run(debug=True)
