@@ -31,6 +31,8 @@ def get_note(id_user):
     notes_list = []
     note_dict = {}
     print(notes)
+    if not notes:
+        return {}
     for note in notes:
         note_dict['idUser'] =note[1]
         note_dict['idNote'] = note[0]
@@ -41,6 +43,21 @@ def get_note(id_user):
     connector.commit()
     connector.close()
     return notes_list
+
+def get_one_note(id_note):
+    connector = get_connection()
+    cursor = connector.cursor()
+    query = f"select id_user, content from notes where id_notes = '{id_note}';"
+    cursor.execute(query)
+    notes = cursor.fetchone()
+    if not notes:
+        return {}
+    note_dict = {}
+    note_dict["id_user"] = notes[0]
+    note_dict["content"] = notes[1]
+    connector.commit()
+    connector.close()
+    return note_dict
 
 def get_user_by_username(username):
     connector = get_connection()
