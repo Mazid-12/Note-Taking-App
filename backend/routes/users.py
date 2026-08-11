@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from werkzeug.security import generate_password_hash
-from models import create_user
+from models.users import create_user
 
 user_bp = Blueprint("users",
                      __name__,

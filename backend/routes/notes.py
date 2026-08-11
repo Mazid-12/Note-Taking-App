@@ -1,5 +1,5 @@
 from flask import Blueprint, request, session
-from models import create_note, get_note, update_note, delete_note, get_one_note
+from models.notes import create_note, get_note, update_note, delete_note, get_one_note
 
 
 note_bp = Blueprint("note_bp",__name__)
@@ -34,6 +34,8 @@ def get_notes(id_user):
     if int(current_user_id) != int(id_user):
         return {"error": "Forbidden"}, 403
     note_data = get_note(id_user)
+    if note_data is None:
+        return {"error": "Note not found"}, 404
     return note_data
 
 
@@ -51,7 +53,7 @@ def edit_note(id_user):
     new_content = data['newContent']
 
     note_data = get_one_note(id_note)
-    if not note_data:
+    if note_data is None:
         return {"error": "Not found"}, 404
     note_owner_id = note_data["id_user"]
     if int(id_user) != int(note_owner_id):
@@ -76,7 +78,7 @@ def cancel_note(id_user, id_note):
         return {"error": "Forbidden"}, 403
 
     note_data = get_one_note(id_note)
-    if not note_data:
+    if note_data is None:
         return {"error": "Not found"}, 404
     note_owner_id = note_data["id_user"]
     if int(id_user) != int(note_owner_id):

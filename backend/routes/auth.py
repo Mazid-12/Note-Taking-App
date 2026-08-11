@@ -1,5 +1,5 @@
 from flask import Blueprint, request, session
-from models import get_user_by_username
+from models.users import get_user_by_username
 from werkzeug.security import check_password_hash
 
 

@@ -1,15 +1,5 @@
 from database import get_connection
 
-#CREATE
-def create_user(username, password_hash):
-    connector = get_connection()
-    cursor = connector.cursor()
-    query = f"insert into users (username, password_hash) values ('{username}', '{password_hash}');"
-    cursor.execute(query)
-    print('user created!')
-    connector.commit()
-    connector.close()
-
 def create_note(id_user, content):
     connector = get_connection()
     cursor = connector.cursor()
@@ -21,7 +11,7 @@ def create_note(id_user, content):
     print('note created')
 
 
-#READ
+
 def get_note(id_user):
     connector = get_connection()
     cursor = connector.cursor()
@@ -30,9 +20,8 @@ def get_note(id_user):
     notes = cursor.fetchall()
     notes_list = []
     note_dict = {}
-    print(notes)
     if not notes:
-        return {}
+        return None
     for note in notes:
         note_dict['idUser'] =note[1]
         note_dict['idNote'] = note[0]
@@ -51,7 +40,7 @@ def get_one_note(id_note):
     cursor.execute(query)
     notes = cursor.fetchone()
     if not notes:
-        return {}
+        return None
     note_dict = {}
     note_dict["id_user"] = notes[0]
     note_dict["content"] = notes[1]
@@ -59,23 +48,6 @@ def get_one_note(id_note):
     connector.close()
     return note_dict
 
-def get_user_by_username(username):
-    connector = get_connection()
-    cursor = connector.cursor()
-    query = f"select * from users where username = '{username}';"
-    cursor.execute(query)
-    user_data = cursor.fetchone()
-    connector.commit()
-    connector.close()
-    if not user_data:
-        return {}
-    user = {}
-    user["id"]= user_data[0]
-    user["username"]= user_data[1]
-    user["password"]= user_data[2]
-    return user
-
-#UPDATE
 def update_note(id_note, new_content):
     connector = get_connection()
     cursor = connector.cursor()
@@ -86,7 +58,6 @@ def update_note(id_note, new_content):
     connector.close()
 
 
-#DELETE
 def delete_note(id_note):
     try:
         connector = get_connection()
