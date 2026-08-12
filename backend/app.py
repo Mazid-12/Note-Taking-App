@@ -10,7 +10,7 @@ load_dotenv("../.env")
 
 app = Flask(__name__)
 
-CORS(app)
+CORS(app, supports_credentials=True)
 
 app.secret_key = os.getenv("")
 app.register_blueprint(user_bp)
@@ -32,4 +32,4 @@ def internal_server_error(error):
 
 
 if __name__=="__main__":
-    app.run(debug=False)
+    app.run(debug=False )

@@ -20,4 +20,5 @@ def login():
     if not is_correct:
         return {"error": "Incorrect password"}, 401
     session["user_id"] = user["id"]
-    return {"message": "Login successful"}, 200
+    return {"message": "Login successful!",
+            "user_id": f"{user['id']}"}, 200

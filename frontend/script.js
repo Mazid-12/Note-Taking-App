@@ -20,7 +20,8 @@ form.addEventListener("submit", async (event)=>{
         headers: {
             "content-type": "application/json"
         },
-        body: JSON.stringify(user_data)
+        body: JSON.stringify(user_data),
+        credentials: "include"
     }
         )
 

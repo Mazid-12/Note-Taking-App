@@ -28,14 +28,14 @@ def add_note():
     return {"message": "note created"}, 201
 
 
-@note_bp.route("/users/<id_user>/notes", methods=["GET"])
-def get_notes(id_user): 
+@note_bp.route("/notes", methods=["GET"])
+def get_notes(): 
     current_user_id = session.get("user_id")
+    print(current_user_id)
     if current_user_id == None:
+        print(current_user_id)
         return {"error": "Not authenticated"}, 401
-    if int(current_user_id) != int(id_user):
-        return {"error": "Forbidden"}, 403
-    note_data = get_note(id_user)
+    note_data = get_note(current_user_id)
     if note_data is None:
         return {"error": "Note not found"}, 404
     return note_data
