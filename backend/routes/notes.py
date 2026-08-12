@@ -15,14 +15,16 @@ def add_note():
         return {"message": "Content is required"}, 400
     
     idUser = data['idUser']
+    noteTitle = data["noteTitle"]
     noteContent = data['noteContent']
+    
     current_user_id = session.get("user_id")
     if current_user_id == None:
         return {"error": "Not authenticated"}, 401
     if int(current_user_id) != int(idUser):
         return {"error": "Forbidden"}, 403
     
-    create_note(idUser, noteContent)
+    create_note(idUser, noteTitle, noteContent)
     return {"message": "note created"}, 201
 
 
@@ -51,6 +53,7 @@ def edit_note(id_user):
     
     id_note = data['idNote']
     new_content = data['newContent']
+    new_title = data['newTitle']
 
     note_data = get_one_note(id_note)
     if note_data is None:
@@ -65,7 +68,7 @@ def edit_note(id_user):
     if int(current_user_id) != int(id_user):
         return {"error": "Forbidden"}, 403
     
-    update_note(id_note, new_content)
+    update_note(id_note, new_title, new_content)
     return {'message': 'note updated'}, 200
 
 

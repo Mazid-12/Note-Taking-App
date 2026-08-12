@@ -1,9 +1,9 @@
 from database import get_connection
 
-def create_note(id_user, content):
+def create_note(id_user, title, content):
     connector = get_connection()
     cursor = connector.cursor()
-    query = f"insert into notes (id_user, content) values ('{id_user}', '{content}');"
+    query = f"insert into notes (id_user, title, content) values ('{id_user}', '{title}', '{content}');"
     cursor.execute(query)
     connector.commit()
     connector.close()
@@ -25,7 +25,8 @@ def get_note(id_user):
     for note in notes:
         note_dict['idUser'] =note[1]
         note_dict['idNote'] = note[0]
-        note_dict['content'] = note[2]
+        note_dict['title'] = note[2]
+        note_dict['content'] = note[3]
         notes_list.append(note_dict)
         note_dict = {}
     print(notes_list)
@@ -36,22 +37,23 @@ def get_note(id_user):
 def get_one_note(id_note):
     connector = get_connection()
     cursor = connector.cursor()
-    query = f"select id_user, content from notes where id_notes = '{id_note}';"
+    query = f"select id_user, title, content from notes where id_notes = '{id_note}';"
     cursor.execute(query)
     notes = cursor.fetchone()
     if not notes:
         return None
     note_dict = {}
     note_dict["id_user"] = notes[0]
-    note_dict["content"] = notes[1]
+    note_dict["title"] = notes[1]
+    note_dict["content"] = notes[2]
     connector.commit()
     connector.close()
     return note_dict
 
-def update_note(id_note, new_content):
+def update_note(id_note, new_title, new_content):
     connector = get_connection()
     cursor = connector.cursor()
-    query = f"update notes set content = '{new_content}' where id_notes = '{id_note}';"
+    query = f"update notes set title = '{new_title}', content = '{new_content}' where id_notes = '{id_note}';"
     cursor.execute(query)
     print('note updated sucessfully!')
     connector.commit()
