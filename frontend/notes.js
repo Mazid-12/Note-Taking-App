@@ -1,4 +1,5 @@
 const container = document.querySelector(".notes-container")
+const menuBtn = document.querySelector(".three-dots")
 
 async function get_notes() {
     const response = await fetch("http://127.0.0.1:5000/notes",{
@@ -7,15 +8,44 @@ async function get_notes() {
     }
         
     )
-    const result = await response.json();
-    console.log(result)
+    
+    if(response.status === 200){
+        const result = await response.json();
+        result.forEach(note => {
+            create_card(note) 
+        });
 
-    result.forEach(note => {
-        create_card(note) 
-    });
+        const new_container = document.querySelectorAll(".note-card");
+
+        new_container.forEach(card=>{
+            const menuBtn = card.querySelector('.three-dots');
+            menuBtn.addEventListener("click", event=>{
+                console.log("clicked")
+
+                const menuCard = card.querySelector(".menu");
+                menuCard.classList.toggle("hidden")
+            })
+        const deleteBtn = card.querySelector(".delete")
+        deleteBtn.addEventListener("click", async ()=>{
+            console.log("deleted");
+            
+            idNote = card.getAttribute("data-note_id")
+            const deleteResult = await delete_note(idNote);
+            if(deleteResult.status === 200){
+                card.style.display = "none"
+            }
+            })
+        })
+    }
+    else{
+
+    }
+    
+
+
     
 }
-get_notes()
+ get_notes()
 
 function create_card(note){
     const card = document.createElement('div')
@@ -34,13 +64,16 @@ function create_card(note){
     threePoints.classList.add("three-dots");
     menu.classList.add("menu");
     menu_container.classList.add("menu-container");
-    menu.classList.add("inactive")
+    menu.classList.add("hidden")
+    deleteBtn.classList.add("delete");
+    editBtn.classList.add("edit")
 
     title.textContent = note.title;
     content.textContent = note.content;
     threePoints.textContent = "⋮";
     editBtn.textContent = "Edit";
     deleteBtn.textContent = "Delete";
+    card.dataset.note_id = note.idNote;
 
     menu.appendChild(editBtn)
     menu.appendChild(deleteBtn)
@@ -53,4 +86,23 @@ function create_card(note){
     card.appendChild(content)
 
     container.appendChild(card)
+
+
 }
+
+
+async function delete_note(id_note){
+    const result = await fetch(`http://127.0.0.1:5000/notes/${id_note}`,{
+        method: "DELETE",
+        credentials: "include"
+    })
+    return result
+
+    
+
+
+}
+
+
+
+

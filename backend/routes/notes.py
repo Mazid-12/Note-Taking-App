@@ -72,20 +72,19 @@ def edit_note(id_user):
     return {'message': 'note updated'}, 200
 
 
-@note_bp.route('/users/<id_user>/notes/<id_note>', methods=["DELETE"])
-def cancel_note(id_user, id_note):
+@note_bp.route('/notes/<id_note>', methods=["DELETE"])
+def cancel_note(id_note):
+    print("cacelling")
     current_user_id = session.get("user_id")
     if current_user_id == None:
         return {"error": "Not authenticated"}, 401
-    if int(current_user_id) != int(id_user):
-        return {"error": "Forbidden"}, 403
 
     note_data = get_one_note(id_note)
+    print(note_data)
     if note_data is None:
         return {"error": "Not found"}, 404
-    note_owner_id = note_data["id_user"]
-    if int(id_user) != int(note_owner_id):
-        return {"error": "Unauthorised"}, 403
+    if note_data["id_user"] != current_user_id:
+        return {"error": "Not authorized"}, 403 
     
     delete_note(id_note)
     return {'message': 'note deleted'}, 200

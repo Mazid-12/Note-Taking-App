@@ -29,7 +29,6 @@ def get_note(id_user):
         note_dict['content'] = note[3]
         notes_list.append(note_dict)
         note_dict = {}
-    print(notes_list)
     connector.commit()
     connector.close()
     return notes_list
@@ -48,6 +47,7 @@ def get_one_note(id_note):
     note_dict["content"] = notes[2]
     connector.commit()
     connector.close()
+    print("called")
     return note_dict
 
 def update_note(id_note, new_title, new_content):
