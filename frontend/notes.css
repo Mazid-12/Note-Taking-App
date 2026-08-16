@@ -7,7 +7,7 @@
 body{
     border: 2px solid;
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
     background-color: rgb(229, 229, 229);
     font-family: sans-serif;
 }
@@ -76,7 +76,7 @@ section{
     border-radius: 8px;
     padding: 10px;
     box-shadow: 0 4px 12px 10px rgba(0,0,0,0.1);
-    position: relative;
+    
 } 
 
 .top-section{
@@ -91,22 +91,31 @@ section{
     flex-direction: column;
     align-items: flex-end;
     width: 100%;
+    position: relative;
 }
 
 .menu{
     display: flex;
     flex-direction: column;
-    width: 70%;
+    width: 120px;
     padding: 5px;
     border-radius: 5px;
     position: absolute;
-    top: 55px;
-    left: 80px
+    top: 100%;
+    right: 0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 
 }
 
 .menu.hidden{
     display: none;
+}
+
+.menuBtn{
+    border: 1px solid rgba(97, 96, 96, 0.9);
+}
+.menuBtn:hover{
+    background-color: rgb(191, 188, 188);
 }
 
 .three-dots{
@@ -120,4 +129,7 @@ section{
 
 .three-dots:hover{
     background-color: rgb(237, 235, 235);
+}
+.content{
+    overflow-wrap: break-word;
 }

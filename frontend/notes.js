@@ -66,7 +66,9 @@ function create_card(note){
     menu_container.classList.add("menu-container");
     menu.classList.add("hidden")
     deleteBtn.classList.add("delete");
-    editBtn.classList.add("edit")
+    editBtn.classList.add("edit");
+    deleteBtn.classList.add("menuBtn");
+    editBtn.classList.add("menuBtn")
 
     title.textContent = note.title;
     content.textContent = note.content;
