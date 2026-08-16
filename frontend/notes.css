@@ -10,6 +10,7 @@ body{
     min-height: 100vh;
     background-color: rgb(229, 229, 229);
     font-family: sans-serif;
+    position: relative;
 }
 
 section{
@@ -133,3 +134,67 @@ section{
 .content{
     overflow-wrap: break-word;
 }
+
+
+
+.new-card{
+    margin: auto;
+    width: 60%;
+    border: 2px solid;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 15px;
+    font-weight: bold;
+    position: absolute;
+    top: 30%;
+    left: 20%;
+    background-color: rgb(240, 238, 238);
+
+}
+
+.new-card.hidden{
+    display: none;
+}
+
+section.blurred{
+    filter: blur(5px);
+    pointer-events: none;
+}
+
+.new-card label{
+    margin-top: 20px;
+}
+
+.new-card button{
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+.newTitle{
+    width: 40%;
+    height: 2rem;
+    border-radius: 5px;
+    font-size: 1.2rem;
+}
+
+.newContent{
+    height: 10rem;
+    width: 70%;
+    font-size: 1.3rem;
+}
+
+.newBtn{
+    width: 20%;
+    height: 2rem;
+    border: 2px solid;
+}
+.newBtn:hover{
+    background-color: rgb(211, 208, 208);
+}
+
+.new-menu{
+    width: 100%;
+    text-align: center;
+}
+

@@ -41,9 +41,10 @@ def get_notes():
     return note_data
 
 
-@note_bp.route("/users/<id_user>/notes", methods=["PUT"])
-def edit_note(id_user):
+@note_bp.route("/notes", methods=["PUT"])
+def edit_note():
     data = request.get_json()
+    current_user_id = session.get("user_id")
     if not data:
         return {"message": "Request body needed"}, 400
     if "idNote" not in data:
@@ -59,14 +60,11 @@ def edit_note(id_user):
     if note_data is None:
         return {"error": "Not found"}, 404
     note_owner_id = note_data["id_user"]
-    if int(id_user) != int(note_owner_id):
+    if current_user_id != int(note_owner_id):
         return {"error": "Unauthorised"}, 403
 
-    current_user_id = session.get("user_id")
     if current_user_id == None:
         return {"error": "Not authenticated"}, 401
-    if int(current_user_id) != int(id_user):
-        return {"error": "Forbidden"}, 403
     
     update_note(id_note, new_title, new_content)
     return {'message': 'note updated'}, 200
