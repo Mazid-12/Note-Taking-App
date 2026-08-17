@@ -1,0 +1,212 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    border: 2px solid;
+    width: 100%;
+    min-height: 100vh;
+    background-color: rgb(229, 229, 229);
+    font-family: sans-serif;
+    position: relative;
+}
+
+section{
+    width: 100%;
+}
+
+.header{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: rgb(222, 220, 220);
+      
+}
+
+.header h1{
+    font-size: 2.1rem;
+}
+
+.logoutBtn{
+    width: 10%;
+    border-radius: 5px;
+    background-color: rgb(237, 133, 95) ;
+    color: white;
+    border: none;
+    font-size: 1.2rem;
+    transition: background-color 0.3s, transform 0.3s;
+}
+.logoutBtn:hover{
+    background-color:rgb(218, 104, 63) ;
+    transform: scale(1.01);
+}
+
+
+.notes-bar{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.notes-bar p{
+    font-size: 1.5rem;
+
+}
+
+.newNoteBtn{
+    width: 15%;
+    height: 2rem;
+    border-radius: 5px;
+    background-color: rgb(243, 213, 176);
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: none;
+    box-shadow: 0 4px 12px 5px rgba(0,0,0,0.1);
+    transition: 0.3s;
+}
+.newNoteBtn:hover{
+    background-color: rgb(246, 182, 104);
+}
+
+
+
+.notes-container{
+    margin: 20px;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    padding: 10px;
+    gap: 20px;
+
+}
+
+.note-card{
+    background-color: white;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 4px 12px 10px rgba(0,0,0,0.1);
+    
+} 
+
+.top-section{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding: 10px
+}
+
+.menu-container{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    width: 100%;
+    position: relative;
+}
+
+.menu{
+    display: flex;
+    flex-direction: column;
+    width: 120px;
+    padding: 5px;
+    border-radius: 5px;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+
+}
+
+.menu.hidden{
+    display: none;
+}
+
+.menuBtn{
+    border: 1px solid rgba(97, 96, 96, 0.9);
+}
+.menuBtn:hover{
+    background-color: rgb(191, 188, 188);
+}
+
+.three-dots{
+    font-size: 1.7rem;
+    border: none;
+    padding: 2px 20px 2px 20px;
+    background-color: white;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+}
+
+.three-dots:hover{
+    background-color: rgb(237, 235, 235);
+}
+.content{
+    overflow-wrap: break-word;
+}
+
+
+
+.new-card{
+    margin: auto;
+    width: 60%;
+    border: 2px solid;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 15px;
+    font-weight: bold;
+    position: absolute;
+    top: 30%;
+    left: 20%;
+    background-color: rgb(240, 238, 238);
+
+}
+
+.new-card.hidden{
+    display: none;
+}
+
+section.blurred{
+    filter: blur(5px);
+    pointer-events: none;
+}
+
+.new-card label{
+    margin-top: 20px;
+}
+
+.new-card button{
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+.newTitle{
+    width: 40%;
+    height: 2rem;
+    border-radius: 5px;
+    font-size: 1.2rem;
+}
+
+.newContent{
+    height: 10rem;
+    width: 70%;
+    font-size: 1.3rem;
+}
+
+.newBtn{
+    width: 20%;
+    height: 2rem;
+    border: 2px solid;
+}
+.newBtn:hover{
+    background-color: rgb(211, 208, 208);
+}
+
+.new-menu{
+    width: 100%;
+    text-align: center;
+}
+
+

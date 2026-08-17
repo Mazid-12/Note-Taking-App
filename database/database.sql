@@ -14,9 +14,10 @@ create database note_taker;
 
 
 create table users (id_user serial primary key, username varchar (50) unique, password_hash text not null);
-create table notes (id_notes serial primary key, id_user  integer references users(id_user), content text, dateCreation date default current_date);
 */
-alter table users add constraint username_unique unique (username);
+create table notes (id_notes serial primary key, id_user  integer references users(id_user), title varchar(50), content text, dateCreation date default current_date);
 /*
+alter table users add constraint username_unique unique (username);
+
 insert into users (username, password_hash) values ('mazid', '2edcxwtgv');
 insert into notes (id_user, content) values (1, 'I am very happy');*/

@@ -6,7 +6,7 @@ const failure_display = document.querySelector(".failure-response")
 
 let user_data = {}
 
-form.addEventListener("submit", async ()=>{
+form.addEventListener("submit", async (event)=>{
     event.preventDefault();
     console.log("Login form submitted");
 
@@ -20,18 +20,25 @@ form.addEventListener("submit", async ()=>{
         headers: {
             "content-type": "application/json"
         },
-        body: JSON.stringify(user_data)
+        body: JSON.stringify(user_data),
+        credentials: "include"
     }
         )
 
     const result = await response.json()
     console.log(result)
 
+    success_display.style.display = "None"
+    failure_display.style.display = "None"
     if(response.status === 200){
         success_display.style.display = "block";
     }
     else{
+        failure_display.textContent = `${result.error}`
         failure_display.style.display = "block";
     }
+
+    username_input.value = "";
+    password_input.value = ""
 
 })
