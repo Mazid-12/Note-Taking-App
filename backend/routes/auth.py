@@ -22,3 +22,8 @@ def login():
     session["user_id"] = user["id"]
     return {"message": "Login successful!",
             "user_id": f"{user['id']}"}, 200
+
+@auth_bp.route("/logout", methods=['POST'])
+def logout():
+    session.clear()
+    return {"message": "Logout successful"}

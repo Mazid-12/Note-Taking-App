@@ -9,12 +9,10 @@ def add_note():
     data = request.get_json()
     if not data:
         return {"message": "Request body needed"}, 400
-    if "idUser" not in data:
-        return {"message": "User ID is required"}, 400
     if "noteContent" not in data:
         return {"message": "Content is required"}, 400
     
-    idUser = data['idUser']
+    idUser = session.get("user_id")
     noteTitle = data["noteTitle"]
     noteContent = data['noteContent']
     
