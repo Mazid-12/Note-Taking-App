@@ -72,7 +72,9 @@ saveBtn.addEventListener("click", ()=>{
         console.log(editedCard)
         editedTitle.textContent = getTitle;
         editedContent.textContent = getContent;
-        update_note(note_id, getTitle, getContent);  
+        update_note(note_id, getTitle, getContent);
+        newTitle.value = "";
+        newContent.value = ""; 
     } 
     else if(editState==='create'){
         let newNote = {};
@@ -184,7 +186,11 @@ logoutBtn.addEventListener("click", async ()=>{
         method: "POST",
         credentials: "include"
     })
-    console.log(await result.json())
+    console.log(result)
+    if(result.ok){
+        window.location.href = "index.html";
+    }
+    
 })
 
 
