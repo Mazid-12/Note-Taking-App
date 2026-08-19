@@ -22,6 +22,9 @@ async function get_notes() {
             create_card(note) 
         });     
     }
+    else if(response.status ===401){
+        window.location.href = "index.html";
+    }
     else{
     }   
 }
